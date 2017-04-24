@@ -18,6 +18,7 @@ public class WordGuess {
     public static void main(String[] args) {
         final String SECRET_WORD = "BRAIN";
 	final String FLAG = "!";
+        int score = 100;
 	String wordSoFar = "", updatedWord = "";
 	String letterGuess, wordGuess = "";
 	int numGuesses = 0;
@@ -53,7 +54,8 @@ public class WordGuess {
 				
 	/* display guessed letter instead of dash */
 	System.out.println(wordSoFar + "\n");
-            } while (!letterGuess.equals(FLAG) && !wordSoFar.equals(SECRET_WORD));
+        score -= 10;
+            } while (!letterGuess.equals(FLAG) && !wordSoFar.equals(SECRET_WORD) && score >0);
 		
 	/* finish game and display message and number of guesses */
 	if (letterGuess.equals(FLAG)) {
@@ -61,13 +63,20 @@ public class WordGuess {
 		wordGuess = input.nextLine();
 		wordGuess = wordGuess.toUpperCase();
 	}
-	if (wordGuess.equals(SECRET_WORD) || wordSoFar.equals(SECRET_WORD)) {
-		System.out.println("You won!");		
-	} else if (score == 0){
-		System.out.println("Sorry. You lose.");
-	}
-	System.out.println("The secret word is " + SECRET_WORD);
-	System.out.println("You made " + numGuesses + " guesses.");
+          
+    if (wordGuess.equals(SECRET_WORD) || wordSoFar.equals(SECRET_WORD)) {
+	System.out.println("You won!");		
+    } 
+    else if (score == 0){
+        System.out.println("Your score is 0. You lose.");
+    }
+    else {
+            System.out.println("Sorry. You lose.");
+    }
+        
+    System.out.println("The secret word is " + SECRET_WORD);
+    System.out.println("You made " + numGuesses + " guesses.");
+    System.out.println("Your score is " + score + ".");
     }
     
 }
